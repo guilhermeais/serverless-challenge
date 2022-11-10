@@ -5,8 +5,8 @@ export class GetEmployee {
     this.#getEmployeeRepository = getEmployeeRepository;
   }
 
-  async execute({ id, name }) {
-    const employee = await this.#getEmployeeRepository.get({ id, name });
+  async execute({ id, name, cpf }) {
+    const employee = await this.#getEmployeeRepository.get({ id, name, cpf });
     return employee;
   }
 }

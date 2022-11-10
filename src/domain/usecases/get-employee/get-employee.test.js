@@ -1,22 +1,8 @@
 import { jest, describe, test } from '@jest/globals'
 import { GetEmployee } from '.'
 import { faker } from '@faker-js/faker'
+import { GetEmployeeRepositorySpy } from '../../../../tests/mocks/data/repositories/get-employee-repository-spy.js'
 describe('GetEmployee', () => {
-  class GetEmployeeRepositorySpy {
-    params = null
-    result = {
-      id: faker.datatype.uuid(),
-      name: faker.name.firstName(),
-      role: faker.name.jobTitle(),
-      salary: faker.datatype.number(),
-      age: faker.datatype.number(),
-    }
-    async get(...params) {
-      this.params = params
-      return this.result
-    }
-  }
-
   function makeSut() {
     const getEmployeeRepositorySpy = new GetEmployeeRepositorySpy()
     const sut = new GetEmployee({
@@ -60,6 +46,6 @@ describe('GetEmployee', () => {
       }
       const promise = sut.execute(params)
       await expect(promise).rejects.toThrow(mockedError)
-    });
+    })
   })
 })
