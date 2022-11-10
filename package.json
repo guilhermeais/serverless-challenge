@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dynamodb:emulator": "docker-compose up -d dynamodb && bash wait-for-dynamodb-container.sh",
-    "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules  npx jest -w 2 --passWithNoTests --silent --noStackTrace",
+    "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules  npx jest --runInBand --passWithNoTests --silent --noStackTrace",
     "test:verbose": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules  npx jest --passWithNoTests --runInBand",
     "test:unit": "npm run test -- --onlyChanged --watch -c jest-unit-config.js",
     "pretest:integration": "npm run dynamodb:emulator",

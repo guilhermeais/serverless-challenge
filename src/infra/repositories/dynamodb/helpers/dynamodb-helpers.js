@@ -21,11 +21,13 @@ export class DynamoDBHelpers {
   }
 
   async migrate() {
+    console.log('Migrating tables...');
     const existingTables = await this.#existingTables()
+    console.log('existingTables', existingTables)
     const tablesToCreate = this.#tables.filter(
       table => !existingTables.includes(table.TableName)
     )
-
+    console.log('tablesToCreate', tablesToCreate)
     return Promise.all(
       tablesToCreate.map(async table =>
         this.dynamoDBClient.createTable(table).promise()
@@ -34,19 +36,12 @@ export class DynamoDBHelpers {
   }
 
   async drop() {
+    console.log('Dropping tables...');
     const existingTables = await this.#existingTables()
-    const tablesToDelete = this.#tables.filter(table =>
-      existingTables.includes(table.TableName)
-    )
-
+    console.log('existingTables', existingTables)
     return Promise.all(
-      tablesToDelete.map(async rawTable => {
-        const table = { ...rawTable }
-        delete table.AttributeDefinitions
-        delete table.KeySchema
-        delete table.ProvisionedThroughput
-        delete table.StreamSpecification
-        return this.dynamoDBClient.deleteTable(table).promise()
+      existingTables.map(async TableName => {
+        return await this.dynamoDBClient.deleteTable({TableName}).promise()
       })
     )
   }
