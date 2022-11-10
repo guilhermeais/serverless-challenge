@@ -26,16 +26,25 @@ describe('CreateEmployeeDynamoDBRepository', () => {
     test('should create a employee', async () => {
       const { sut } = makeSut()
       const employee = mockEmployee()
-      await sut.create(employee)
       const params = {
         TableName: 'employees',
         Key: {
           id: employee.id,
         },
       }
+      const resultBeforeInsert = await dynamoDBClient.get(params).promise()
+      expect(resultBeforeInsert.Item).toBeUndefined()
+      await sut.create(employee)
 
       const result = await dynamoDBClient.get(params).promise()
       expect(result.Item).toEqual(employee)
     })
+
+    test('should return a employee on success', async () => {
+      const { sut } = makeSut()
+      const employee = mockEmployee()
+      const result = await sut.create(employee)
+      expect(result).toEqual(employee)
+    });
   })
 })
