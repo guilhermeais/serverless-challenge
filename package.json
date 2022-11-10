@@ -1,0 +1,27 @@
+{
+  "name": "serverless-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jest-unit-config.js",
+  "type": "module",
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "jest": "^29.3.1"
+  },
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules  npx jest -w 2 --passWithNoTests --silent --noStackTrace",
+    "test:verbose": "npx jest --passWithNoTests --runInBand",
+    "test:unit": "npm run test -- --onlyChanged --watch -c jest-unit-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guilhermeais/serverless-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guilhermeais/serverless-challenge/issues"
+  },
+  "homepage": "https://github.com/guilhermeais/serverless-challenge#readme"
+}
