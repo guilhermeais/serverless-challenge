@@ -21,3 +21,13 @@ export function mockEmployeeInput() {
     cpf: faker.random.numeric(11),
   }
 }
+
+
+export class GetEmployeeSpy {
+  result = mockEmployee()
+  params = null
+  async get(params) {
+    this.params = params
+    return Promise.resolve(this.result)
+  }
+}
