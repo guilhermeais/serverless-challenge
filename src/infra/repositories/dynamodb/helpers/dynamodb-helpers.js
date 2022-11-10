@@ -20,6 +20,22 @@ export class DynamoDBHelpers {
     return (await this.dynamoDBClient.listTables().promise()).TableNames
   }
 
+  mountUpdateExpressions(objectToUpdate) {
+    const UpdateExpression = []
+    const ExpressionAttributeNames = {}
+    const ExpressionAttributeValues = {}
+    Object.keys(objectToUpdate).forEach((key, index) => {
+      UpdateExpression.push(`#${key} = :${key}`)
+      ExpressionAttributeNames[`#${key}`] = key
+      ExpressionAttributeValues[`:${key}`] = objectToUpdate[key]
+    })
+    return {
+      UpdateExpression: `set ${UpdateExpression.join(', ')}`,
+      ExpressionAttributeNames,
+      ExpressionAttributeValues,
+    }
+  }
+
   async migrate() {
     console.log('Migrating tables...');
     const existingTables = await this.#existingTables()
