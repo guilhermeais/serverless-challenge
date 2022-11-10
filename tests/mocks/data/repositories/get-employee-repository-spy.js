@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker'
 import { mockEmployee } from '../../domain/mock-employee'
 
 export class GetEmployeeRepositorySpy {
