@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { describe, test, beforeAll, beforeEach, afterAll } from '@jest/globals'
+import { describe, test, beforeAll, beforeEach, afterAll,expect } from '@jest/globals'
 import { GetEmployeeDynamoDBRepository } from '.'
 import { mockEmployee } from '../../../../../tests/mocks/domain/mock-employee'
 import { DynamoDBHelpers } from '../helpers/dynamodb-helpers'
@@ -16,6 +16,7 @@ describe('GetEmployeeDynamoDBRepository', () => {
   }
   describe('get()', () => {
     beforeAll(async () => {
+      await dynamoDBHelpers.drop()
       await dynamoDBHelpers.migrate()
     })
 
@@ -88,7 +89,7 @@ describe('GetEmployeeDynamoDBRepository', () => {
       }
       await dynamoDBClient.put(paramsTwo).promise()
       const result = await sut.get()
-      expect(result).toEqual([employee, employeeTwo])
+      expect(result).toEqual(expect.arrayContaining([employee, employeeTwo]))
     });
 
   })
