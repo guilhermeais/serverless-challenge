@@ -1,7 +1,7 @@
 import { describe, test, beforeAll, beforeEach } from '@jest/globals'
-import { CreateEmployeeDynamoDBRepository } from './create-employee-dynamodb-repository'
-import { mockEmployee } from '../../../../tests/mocks/domain/mock-employee'
-import { DynamoDBHelpers } from './helpers/dynamodb-helpers'
+import { CreateEmployeeDynamoDBRepository } from '.'
+import { mockEmployee } from '../../../../../tests/mocks/domain/mock-employee'
+import { DynamoDBHelpers } from '../helpers/dynamodb-helpers'
 
 describe('CreateEmployeeDynamoDBRepository', () => {
   const dynamoDBHelpers = new DynamoDBHelpers()

@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk'
 import { env } from '../../../../main/config/env'
-import { tables } from '../migrations'
+import { tables } from './migrations'
 
 export class DynamoDBHelpers {
   #tables = tables
