@@ -1,4 +1,4 @@
-import { describe, test, beforeAll, beforeEach } from '@jest/globals'
+import { describe, test, beforeAll, beforeEach, afterAll } from '@jest/globals'
 import { CreateEmployeeDynamoDBRepository } from '.'
 import { mockEmployee } from '../../../../../tests/mocks/domain/mock-employee'
 import { DynamoDBHelpers } from '../helpers/dynamodb-helpers'
@@ -16,6 +16,10 @@ describe('CreateEmployeeDynamoDBRepository', () => {
   describe('create()', () => {
     beforeAll(async () => {
       await dynamoDBHelpers.migrate()
+    })
+
+    afterAll(async () => {
+      await dynamoDBHelpers.drop()
     })
 
     beforeEach(async () => {
