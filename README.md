@@ -78,4 +78,4 @@ O projeto tem mais ou menos 65% de coverage dos testes. Não consegui atingir 10
   npm run deploy:offline # Faz o deploy local da aplicação
 ```
 A aplicação está rodando no AWS Lambda e pode ser acessada pela API Gateway através do link abaixo:
-https://tgoxhkx8gh.execute-api.sa-east-1.amazonaws.com/dev
+[**Employees API**](https://tgoxhkx8gh.execute-api.sa-east-1.amazonaws.com/dev/employees)
