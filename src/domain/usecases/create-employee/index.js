@@ -1,6 +1,6 @@
-import { DuplicatedEmployeeError } from '../../errors/index.js'
+const { DuplicatedEmployeeError } = require('../../errors/index.js')
 
-export class CreateEmployee {
+class CreateEmployee {
   #createEmployeeRepository = null
   #getEmployeeRepository = null
 
@@ -18,7 +18,10 @@ export class CreateEmployee {
       throw new DuplicatedEmployeeError(employeeExists.name)
     }
 
-    const employeeCreated = await this.#createEmployeeRepository.create(employee)
+    const employeeCreated = await this.#createEmployeeRepository.create(
+      employee
+    )
     return employeeCreated
   }
 }
+module.exports = { CreateEmployee }

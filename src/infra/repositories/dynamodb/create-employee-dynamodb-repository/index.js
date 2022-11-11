@@ -1,4 +1,4 @@
-export class CreateEmployeeDynamoDBRepository {
+class CreateEmployeeDynamoDBRepository {
   /**
    * @type import('aws-sdk').DynamoDB.DocumentClient
    */
@@ -25,4 +25,8 @@ export class CreateEmployeeDynamoDBRepository {
       .promise()
     return employeeInserted.Item
   }
+}
+
+module.exports = {
+  CreateEmployeeDynamoDBRepository,
 }

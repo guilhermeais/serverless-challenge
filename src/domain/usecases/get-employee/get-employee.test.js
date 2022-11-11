@@ -1,7 +1,8 @@
-import { jest, describe, test } from '@jest/globals'
-import { GetEmployee } from '.'
-import { faker } from '@faker-js/faker'
-import { GetEmployeeRepositorySpy } from '../../../../tests/mocks/data/repositories/get-employee-repository-spy.js'
+const { GetEmployee } = require('.')
+const { faker } = require('@faker-js/faker')
+const {
+  GetEmployeeRepositorySpy,
+} = require('../../../../tests/mocks/data/repositories/get-employee-repository-spy.js')
 describe('GetEmployee', () => {
   function makeSut() {
     const getEmployeeRepositorySpy = new GetEmployeeRepositorySpy()

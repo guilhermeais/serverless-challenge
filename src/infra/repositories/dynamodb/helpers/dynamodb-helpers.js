@@ -1,16 +1,20 @@
-import AWS from 'aws-sdk'
-import { env } from '../../../../main/config/env.js'
-import { tables } from './migrations/index.js'
+const AWS = require('aws-sdk')
+const { env } = require('../../../../main/config/env.js')
+const { tables } = require('./migrations/index.js')
 const isTesting = env.nodeEnv === 'test'
-export class DynamoDBHelpers {
+class DynamoDBHelpers {
   #tables = tables
   #connectionParams = {
-    ...(isTesting ? { endpoint: env.dynamoDBEndpoint } : {}),
+    ...(isTesting
+      ? {
+          endpoint: env.dynamoDBEndpoint,
+          credentials: {
+            accessKeyId: env.awsAccessKeyId,
+            secretAccessKey: env.awsSecretAccessKey,
+          },
+        }
+      : {}),
     region: env.dynamoDBRegion,
-    credentials: {
-      accessKeyId: env.awsAccessKeyId,
-      secretAccessKey: env.awsSecretAccessKey,
-    },
   }
 
   constructor() {
@@ -65,4 +69,8 @@ export class DynamoDBHelpers {
   getDocumentClient() {
     return new AWS.DynamoDB.DocumentClient(this.#connectionParams)
   }
+}
+
+module.exports = {
+  DynamoDBHelpers,
 }

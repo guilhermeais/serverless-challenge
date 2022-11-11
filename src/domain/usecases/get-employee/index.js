@@ -1,4 +1,4 @@
-export class GetEmployee {
+class GetEmployee {
   #getEmployeeRepository = null
 
   constructor({ getEmployeeRepository }) {
@@ -9,4 +9,8 @@ export class GetEmployee {
     const employee = await this.#getEmployeeRepository.get({ id, name, cpf });
     return employee;
   }
+}
+
+module.exports = {
+  GetEmployee,
 }

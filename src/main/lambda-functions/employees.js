@@ -1,7 +1,7 @@
-import { adaptLambda } from '../adapters/aws/lambda-adapter.js'
-import { makeGetEmpoyeeController } from '../factories/controllers/employee/get-employee-controller-factory.js'
+const  { adaptLambda }  = require('../adapters/aws/lambda-adapter.js')
+const  { makeGetEmpoyeeController }  = require('../factories/controllers/employee/get-employee-controller-factory.js')
 
-export const getEmployeeLambda = adaptLambda(
+module.exports.getEmployeeLambda = adaptLambda(
     makeGetEmpoyeeController()
   )
 

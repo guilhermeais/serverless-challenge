@@ -1,7 +1,7 @@
-import { describe, test, beforeAll, beforeEach, afterAll } from '@jest/globals'
-import { DeleteEmployeeDynamoDBRepository } from '.'
-import { mockEmployee } from '../../../../../tests/mocks/domain/mock-employee'
-import { DynamoDBHelpers } from '../helpers/dynamodb-helpers'
+const  { describe, test, beforeAll, beforeEach, afterAll }  = require('@jest/globals')
+const  { DeleteEmployeeDynamoDBRepository }  = require('.')
+const  { mockEmployee }  = require('../../../../../tests/mocks/domain/mock-employee')
+const  { DynamoDBHelpers }  = require('../helpers/dynamodb-helpers')
 
 describe('DeleteEmployeeDynamoDBRepository', () => {
   const dynamoDBHelpers = new DynamoDBHelpers()

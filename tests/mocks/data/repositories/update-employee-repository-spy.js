@@ -1,5 +1,5 @@
-import { mockEmployee } from '../../domain/mock-employee'
-export class UpdateEmployeeRepositorySpy {
+const  { mockEmployee }  = require('../../domain/mock-employee')
+class UpdateEmployeeRepositorySpy {
   params = null
   result = mockEmployee()
   async update(...params) {
@@ -7,3 +7,5 @@ export class UpdateEmployeeRepositorySpy {
     return this.result
   }
 }
+
+module.exports = {UpdateEmployeeRepositorySpy}

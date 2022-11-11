@@ -1,7 +1,12 @@
+org: guilhermeais
+app: serverless-challenge
 service: serverless-challenge
 provider:
   name: aws
   runtime: nodejs16.x
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    NODE_ENV: production
   region: sa-east-1
   iamRoleStatements:
     - Effect: Allow
@@ -15,7 +20,7 @@ provider:
         - dynamodb:DeleteItem
         - lambda:GetFunction
       Resource:
-        - arn:aws:dynamodb:::*
+        - arn:aws:dynamodb:sa-east-1:*:*
 plugins:
   - serverless-offline
 

@@ -1,6 +1,6 @@
-import { Validation } from './base/validation.js';
+const  { Validation }  = require('./base/validation.js');
 
-export class ValidationComposite extends Validation {
+class ValidationComposite extends Validation {
   #validators;
 
   constructor(...validators) {
@@ -17,3 +17,7 @@ export class ValidationComposite extends Validation {
     }
   }
 }
+
+module.exports = {
+  ValidationComposite,
+};

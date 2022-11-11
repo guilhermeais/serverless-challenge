@@ -1,4 +1,4 @@
-export function adaptLambda(controller) {
+function adaptLambda(controller) {
   return async (event, context) => {
     const httpRequest = {
       ...(event.body? JSON.parse(event.body) : {}),
@@ -13,3 +13,5 @@ export function adaptLambda(controller) {
     }
   }
 }
+
+module.exports = { adaptLambda }

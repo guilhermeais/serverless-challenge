@@ -1,1 +1,3 @@
-export * from './get-employee-controller.js'
+const { GetEmployeeController } = require('./get-employee-controller');
+
+module.exports = {GetEmployeeController}

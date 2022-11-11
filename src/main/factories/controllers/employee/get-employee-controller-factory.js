@@ -1,19 +1,33 @@
-import { GetEmployeeController } from '../../../../presentation/controllers/employees-controller/index.js';
-import { GetEmployee } from '../../../../domain/usecases/get-employee/index.js'
-import { GetEmployeeDynamoDBRepository } from '../../../../infra/repositories/dynamodb/index.js'
-import { DynamoDBHelpers } from '../../../../infra/repositories/dynamodb/helpers/dynamodb-helpers.js';
-import  { ValidationComposite } from '../../../../validator/validation-composite.js'
-export function makeGetEmpoyeeController() {
+const {
+  GetEmployeeController,
+} = require('../../../../presentation/controllers/employees-controller/index.js')
+const {
+  GetEmployee,
+} = require('../../../../domain/usecases/get-employee/index.js')
+const {
+  GetEmployeeDynamoDBRepository,
+} = require('../../../../infra/repositories/dynamodb/index.js')
+const {
+  DynamoDBHelpers,
+} = require('../../../../infra/repositories/dynamodb/helpers/dynamodb-helpers.js')
+const {
+  ValidationComposite,
+} = require('../../../../validator/validation-composite.js')
+function makeGetEmpoyeeController() {
   const getEmployeeUseCase = new GetEmployee({
     getEmployeeRepository: new GetEmployeeDynamoDBRepository({
-      dynamoDBClient: new DynamoDBHelpers().getDocumentClient()
-    })
-  });
+      dynamoDBClient: new DynamoDBHelpers().getDocumentClient(),
+    }),
+  })
 
   const validator = new ValidationComposite()
-  
+
   return new GetEmployeeController({
     getEmployeeUseCase,
-    validator
+    validator,
   })
+}
+
+module.exports = {
+  makeGetEmpoyeeController,
 }

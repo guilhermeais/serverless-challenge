@@ -1,6 +1,6 @@
-import { MissingParamError } from '../../presentation/errors/missing-param-error'
+const  { MissingParamError }  = require('../../presentation/errors/missing-param-error')
 
-export class RequiredFieldValidation extends Validation {
+class RequiredFieldValidation extends Validation {
   #fieldName = ''
   constructor (fieldName) {
     super()
@@ -12,4 +12,8 @@ export class RequiredFieldValidation extends Validation {
       return new MissingParamError(this.#fieldName)
     }
   }
+}
+
+module.exports = {
+  RequiredFieldValidation,
 }

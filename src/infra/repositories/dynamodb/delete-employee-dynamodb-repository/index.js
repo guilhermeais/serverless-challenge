@@ -1,4 +1,4 @@
-export class DeleteEmployeeDynamoDBRepository {
+class DeleteEmployeeDynamoDBRepository {
   /**
    * @type import('aws-sdk').DynamoDB.DocumentClient
    */
@@ -19,4 +19,8 @@ export class DeleteEmployeeDynamoDBRepository {
     const { Attributes: result} = await this.#dynamoDBClient.delete(params).promise()
     return !!result?.id
   }
+}
+
+module.exports = {
+  DeleteEmployeeDynamoDBRepository,
 }

@@ -1,4 +1,4 @@
-export class EmployeeNotFoundError extends Error {
+class EmployeeNotFoundError extends Error {
   constructor(employee) {
     super()
     this.message = `Employee ${employee?.name || ''} with the id ${
@@ -7,3 +7,5 @@ export class EmployeeNotFoundError extends Error {
     this.name = 'EmployeeNotFoundError'
   }
 }
+
+module.exports = {EmployeeNotFoundError}

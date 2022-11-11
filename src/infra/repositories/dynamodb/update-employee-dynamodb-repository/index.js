@@ -1,6 +1,6 @@
-import { DynamoDBHelpers } from '../helpers/dynamodb-helpers.js'
+const  { DynamoDBHelpers }  = require('../helpers/dynamodb-helpers.js')
 
-export class UpdateEmployeeDynamoDBRepository {
+class UpdateEmployeeDynamoDBRepository {
   /**
    * @type import('aws-sdk').DynamoDB.DocumentClient
    */
@@ -10,7 +10,7 @@ export class UpdateEmployeeDynamoDBRepository {
     this.tableName = 'employees'
     this.#dynamoDBClient = dynamoDBClient
   }
-
+  
   async update(id, employee) {
     delete employee.id
     delete employee.createdAt
@@ -29,3 +29,5 @@ export class UpdateEmployeeDynamoDBRepository {
     return result.Attributes
   }
 }
+
+module.exports = {UpdateEmployeeDynamoDBRepository}

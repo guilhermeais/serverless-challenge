@@ -1,9 +1,9 @@
-export const EmployeesTable = {
+const EmployeesTable = {
   AttributeDefinitions: [
     {
       AttributeName: 'id',
       AttributeType: 'S',
-    }
+    },
   ],
   KeySchema: [
     {
@@ -20,3 +20,5 @@ export const EmployeesTable = {
     WriteCapacityUnits: 1,
   },
 }
+
+module.exports = { EmployeesTable }

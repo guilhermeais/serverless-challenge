@@ -2,8 +2,7 @@
   "name": "serverless-challenge",
   "version": "1.0.0",
   "description": "",
-  "main": "jest-unit-config.js",
-  "type": "module",
+  "main": "src/main/lambda-functions/employees.js",
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
     "jest": "^29.3.1",
@@ -12,8 +11,8 @@
   "scripts": {
     "deploy": "sls deploy --verbose",
     "dynamodb:emulator": "docker-compose up -d dynamodb && bash wait-for-dynamodb-container.sh",
-    "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules  npx jest --runInBand --passWithNoTests --silent --noStackTrace",
-    "test:verbose": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules  npx jest --passWithNoTests --runInBand",
+    "test": "cross-env NODE_ENV=test  npx jest --runInBand --passWithNoTests --silent --noStackTrace",
+    "test:verbose": "cross-env NODE_ENV=test  npx jest --passWithNoTests --runInBand",
     "test:unit": "npm run test -- --onlyChanged --watch -c jest-unit-config.js",
     "pretest:integration": "npm run dynamodb:emulator",
     "test:integration": "npm run test -- --onlyChanged --watch -c jest-integration-config.js",
@@ -33,6 +32,7 @@
   "dependencies": {
     "aws-sdk": "^2.1251.0",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "serverless-dotenv-plugin": "^4.0.2"
   }
 }

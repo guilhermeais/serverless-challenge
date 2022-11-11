@@ -1,5 +1,5 @@
-import { faker } from '@faker-js/faker'
-export function mockEmployee() {
+const { faker } = require('@faker-js/faker')
+function mockEmployee() {
   return {
     id: faker.datatype.uuid(),
     name: faker.name.firstName(),
@@ -11,8 +11,7 @@ export function mockEmployee() {
     updatedAt: faker.date.past().toISOString(),
   }
 }
-
-export function mockEmployeeInput() {
+function mockEmployeeInput() {
   return {
     name: faker.name.firstName(),
     role: faker.name.jobTitle(),
@@ -22,8 +21,7 @@ export function mockEmployeeInput() {
   }
 }
 
-
-export class GetEmployeeSpy {
+class GetEmployeeSpy {
   result = mockEmployee()
   params = null
   async execute(params) {
@@ -31,3 +29,5 @@ export class GetEmployeeSpy {
     return Promise.resolve(this.result)
   }
 }
+
+module.exports = { GetEmployeeSpy, mockEmployee, mockEmployeeInput }

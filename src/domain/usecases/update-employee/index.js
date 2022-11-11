@@ -1,14 +1,14 @@
-import { EmployeeNotFoundError } from '../../errors/index.js';
+const  { EmployeeNotFoundError }  = require('../../errors/index.js');
 
-export class UpdateEmployee {
+class UpdateEmployee {
   #updateEmployeeRepository = null
   #getEmployeeRepository = null
-
+  
   constructor({updateEmployeeRepository, getEmployeeRepository}) {
     this.#updateEmployeeRepository = updateEmployeeRepository;
     this.#getEmployeeRepository = getEmployeeRepository;
   }
-
+  
   async execute(id, employee) {
     const employeeExists = await this.#getEmployeeRepository.get(id);
     if (!employeeExists) {
@@ -17,3 +17,5 @@ export class UpdateEmployee {
     return this.#updateEmployeeRepository.update(id, employee);
   }
 }
+
+module.exports = {UpdateEmployee}

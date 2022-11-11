@@ -1,5 +1,5 @@
-import { badRequest, ok, serverError } from '../../utils/http-responses.js'
-export class GetEmployeeController {
+const  { badRequest, ok, serverError }  = require('../../utils/http-responses')
+class GetEmployeeController {
   #getEmployeeUseCase
   #validator
 
@@ -23,4 +23,8 @@ export class GetEmployeeController {
       return serverError(error)
     }
   }
+}
+
+module.exports = {
+  GetEmployeeController,
 }

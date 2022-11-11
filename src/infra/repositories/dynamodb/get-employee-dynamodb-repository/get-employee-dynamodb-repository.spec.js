@@ -1,8 +1,8 @@
-import { faker } from '@faker-js/faker'
-import { describe, test, beforeAll, beforeEach, afterAll,expect } from '@jest/globals'
-import { GetEmployeeDynamoDBRepository } from '.'
-import { mockEmployee } from '../../../../../tests/mocks/domain/mock-employee'
-import { DynamoDBHelpers } from '../helpers/dynamodb-helpers'
+const  { faker }  = require('@faker-js/faker')
+const  { describe, test, beforeAll, beforeEach, afterAll,expect }  = require('@jest/globals')
+const  { GetEmployeeDynamoDBRepository }  = require('.')
+const  { mockEmployee }  = require('../../../../../tests/mocks/domain/mock-employee')
+const  { DynamoDBHelpers }  = require('../helpers/dynamodb-helpers')
 
 describe('GetEmployeeDynamoDBRepository', () => {
   const dynamoDBHelpers = new DynamoDBHelpers()

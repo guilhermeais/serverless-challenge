@@ -1,2 +1,3 @@
-import {EmployeesTable} from './employees-table.js'
-export const tables = [EmployeesTable]
+const { EmployeesTable } = require('./employees-table.js')
+const tables = [EmployeesTable]
+module.exports = { tables }
