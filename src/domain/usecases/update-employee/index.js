@@ -1,4 +1,4 @@
-import { EmployeeNotFoundError } from '../../errors';
+import { EmployeeNotFoundError } from '../../errors/index.js';
 
 export class UpdateEmployee {
   #updateEmployeeRepository = null

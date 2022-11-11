@@ -1,4 +1,4 @@
-import { DuplicatedEmployeeError } from '../../errors'
+import { DuplicatedEmployeeError } from '../../errors/index.js'
 
 export class CreateEmployee {
   #createEmployeeRepository = null

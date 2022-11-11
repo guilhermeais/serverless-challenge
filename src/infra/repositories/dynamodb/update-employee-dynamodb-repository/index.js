@@ -1,4 +1,4 @@
-import { DynamoDBHelpers } from '../helpers/dynamodb-helpers'
+import { DynamoDBHelpers } from '../helpers/dynamodb-helpers.js'
 
 export class UpdateEmployeeDynamoDBRepository {
   /**

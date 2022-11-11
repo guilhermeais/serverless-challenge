@@ -1,11 +1,11 @@
 import AWS from 'aws-sdk'
-import { env } from '../../../../main/config/env'
-import { tables } from './migrations'
-
+import { env } from '../../../../main/config/env.js'
+import { tables } from './migrations/index.js'
+const isTesting = env.nodeEnv === 'test'
 export class DynamoDBHelpers {
   #tables = tables
   #connectionParams = {
-    endpoint: env.dynamoDBEndpoint,
+    ...(isTesting ? { endpoint: env.dynamoDBEndpoint } : {}),
     region: env.dynamoDBRegion,
     credentials: {
       accessKeyId: env.awsAccessKeyId,
@@ -37,7 +37,7 @@ export class DynamoDBHelpers {
   }
 
   async migrate() {
-    console.log('Migrating tables...');
+    console.log('Migrating tables...')
     const existingTables = await this.#existingTables()
     console.log('existingTables', existingTables)
     const tablesToCreate = this.#tables.filter(
@@ -52,12 +52,12 @@ export class DynamoDBHelpers {
   }
 
   async drop() {
-    console.log('Dropping tables...');
+    console.log('Dropping tables...')
     const existingTables = await this.#existingTables()
     console.log('existingTables', existingTables)
     return Promise.all(
       existingTables.map(async TableName => {
-        return await this.dynamoDBClient.deleteTable({TableName}).promise()
+        return await this.dynamoDBClient.deleteTable({ TableName }).promise()
       })
     )
   }

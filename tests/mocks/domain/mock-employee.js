@@ -26,7 +26,7 @@ export function mockEmployeeInput() {
 export class GetEmployeeSpy {
   result = mockEmployee()
   params = null
-  async get(params) {
+  async execute(params) {
     this.params = params
     return Promise.resolve(this.result)
   }

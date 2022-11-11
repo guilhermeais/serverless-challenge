@@ -1,9 +1,9 @@
-import { Validation } from './base/validation';
+import { Validation } from './base/validation.js';
 
 export class ValidationComposite extends Validation {
   #validators;
 
-  constructor(validators) {
+  constructor(...validators) {
     super();
     this.#validators = validators;
   }

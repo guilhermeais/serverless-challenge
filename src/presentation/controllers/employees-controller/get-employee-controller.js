@@ -1,4 +1,4 @@
-import { badRequest, ok, serverError } from '../../utils/http-responses'
+import { badRequest, ok, serverError } from '../../utils/http-responses.js'
 export class GetEmployeeController {
   #getEmployeeUseCase
   #validator
@@ -16,7 +16,7 @@ export class GetEmployeeController {
         return badRequest(error)
       }
 
-      const employee = await this.#getEmployeeUseCase.get(request)
+      const employee = await this.#getEmployeeUseCase.execute(request)
 
       return ok(employee)
     } catch (error) {
