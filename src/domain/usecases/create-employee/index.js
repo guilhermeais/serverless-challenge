@@ -1,5 +1,5 @@
 const { DuplicatedEmployeeError } = require('../../errors/index.js')
-
+const { Employee } = require('../../entities/employee')
 class CreateEmployee {
   #createEmployeeRepository = null
   #getEmployeeRepository = null
@@ -16,8 +16,8 @@ class CreateEmployee {
       cpf: employee.cpf,
     })
 
-    if (employeeExists) {
-      throw new DuplicatedEmployeeError(employeeExists.name)
+    if (employeeExists?.length > 0) {
+      throw new DuplicatedEmployeeError(employeeExists[0].name)
     }
 
     const employeeWithId = {
@@ -27,7 +27,7 @@ class CreateEmployee {
     const employeeCreated = await this.#createEmployeeRepository.create(
       employeeWithId
     )
-    return employeeCreated
+    return new Employee(employeeCreated)
   }
 }
 module.exports = { CreateEmployee }

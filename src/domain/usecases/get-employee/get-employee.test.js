@@ -2,7 +2,7 @@ const { GetEmployee } = require('.')
 const { faker } = require('@faker-js/faker')
 const {
   GetEmployeeRepositorySpy,
-} = require('../../../../tests/mocks/data/repositories/get-employee-repository-spy.js')
+} = require('../../../../tests/mocks/infra/repositories/get-employee-repository-spy')
 describe('GetEmployee', () => {
   function makeSut() {
     const getEmployeeRepositorySpy = new GetEmployeeRepositorySpy()

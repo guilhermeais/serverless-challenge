@@ -1,3 +1,5 @@
+const { Employee } = require('../../entities/employee');
+
 class GetEmployee {
   #getEmployeeRepository = null
 
@@ -7,7 +9,10 @@ class GetEmployee {
 
   async execute({ id, name, cpf }) {
     const employee = await this.#getEmployeeRepository.get({ id, name, cpf });
-    return employee;
+    if (Array.isArray(employee)) {
+      return employee.map(e => new Employee(e));
+    }
+    return new Employee(employee);
   }
 }
 
