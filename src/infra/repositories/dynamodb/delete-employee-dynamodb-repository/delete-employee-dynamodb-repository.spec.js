@@ -34,7 +34,7 @@ describe('DeleteEmployeeDynamoDBRepository', () => {
         TableName: 'employees',
         Item: employeeCreated
       }).promise()
-      const result = await sut.delete(employeeCreated.id)
+      const result = await sut.delete({id: employeeCreated.id})
       const employee = await dynamoDBClient.get({
         TableName: 'employees',
         Key: {
@@ -48,7 +48,7 @@ describe('DeleteEmployeeDynamoDBRepository', () => {
    test('should return false if employee does not exits', async () => {
       const { sut } = makeSut()
       const employeeCreated = mockEmployee()
-      const employeeDeleted = await sut.delete(employeeCreated.id)
+      const employeeDeleted = await sut.delete({id: employeeCreated.id})
       expect(employeeDeleted).toBe(false)
    });
   })

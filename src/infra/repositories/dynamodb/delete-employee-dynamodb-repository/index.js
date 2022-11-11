@@ -8,7 +8,7 @@ class DeleteEmployeeDynamoDBRepository {
     this.#dynamoDBClient = dynamoDBClient
   }
 
-  async delete(id) {
+  async delete({id}) {
     const params = {
       TableName: this.tableName,
       Key: {

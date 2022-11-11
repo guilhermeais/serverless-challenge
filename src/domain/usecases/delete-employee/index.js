@@ -8,12 +8,12 @@ class DeleteEmployee {
     this.#deleteEmployeeRepository = deleteEmployeeRepository
   }
 
-  async execute(id) {
-    const employee = await this.#getEmployeeRepository.get(id)
+  async execute({id}) {
+    const employee = await this.#getEmployeeRepository.get({id})
     if (!employee) {
       throw new EmployeeNotFoundError({ id })
     }
-    await this.#deleteEmployeeRepository.delete(id)
+    await this.#deleteEmployeeRepository.delete({id})
   }
 }
 
