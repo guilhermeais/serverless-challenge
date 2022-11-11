@@ -1,21 +1,25 @@
-const  { EmployeeNotFoundError }  = require('../../errors/index.js');
-
+const { EmployeeNotFoundError } = require('../../errors/index.js')
+const { Employee } = require('../../entities/employee')
 class UpdateEmployee {
   #updateEmployeeRepository = null
   #getEmployeeRepository = null
-  
-  constructor({updateEmployeeRepository, getEmployeeRepository}) {
-    this.#updateEmployeeRepository = updateEmployeeRepository;
-    this.#getEmployeeRepository = getEmployeeRepository;
+
+  constructor({ updateEmployeeRepository, getEmployeeRepository }) {
+    this.#updateEmployeeRepository = updateEmployeeRepository
+    this.#getEmployeeRepository = getEmployeeRepository
   }
-  
+
   async execute(id, employee) {
-    const employeeExists = await this.#getEmployeeRepository.get(id);
+    const employeeExists = await this.#getEmployeeRepository.get(id)
     if (!employeeExists) {
-      throw new EmployeeNotFoundError(employee);
+      throw new EmployeeNotFoundError(employee)
     }
-    return this.#updateEmployeeRepository.update(id, employee);
+    const employeeUpdated = await this.#updateEmployeeRepository.update(
+      id,
+      employee
+    )
+    return new Employee(employeeUpdated)
   }
 }
 
-module.exports = {UpdateEmployee}
+module.exports = { UpdateEmployee }

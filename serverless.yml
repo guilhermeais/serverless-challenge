@@ -50,3 +50,10 @@ functions:
           path: /employees/{id}
           method: delete
           cors: true
+  updateEmployee:
+    handler: src/main/lambda-functions/employees.updateEmployeeLambda
+    events:
+      - http:
+          path: /employees/{id}
+          method: patch
+          cors: true

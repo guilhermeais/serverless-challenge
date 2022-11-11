@@ -4,7 +4,9 @@ const { makeDeleteEmpoyeeController } = require('../factories/controllers/employ
 const {
   makeGetEmpoyeeController,
 } = require('../factories/controllers/employee/get-employee-controller-factory.js')
+const { makeUpdateEmployeeController } = require('../factories/controllers/employee/update-employee-controller-factory.js')
 
 module.exports.getEmployeeLambda = adaptLambda(makeGetEmpoyeeController())
 module.exports.createEmployeeLambda = adaptLambda(makeCreateEmpoyeeController())
 module.exports.deleteEmployeeLambda = adaptLambda(makeDeleteEmpoyeeController())
+module.exports.updateEmployeeLambda = adaptLambda(makeUpdateEmployeeController())
