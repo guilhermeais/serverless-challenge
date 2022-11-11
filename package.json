@@ -9,13 +9,15 @@
   },
   "scripts": {
     "deploy": "sls deploy --verbose",
+    "deploy:offline": "sls offline --httpPort 8080",
     "dynamodb:emulator": "docker-compose up -d dynamodb && bash wait-for-dynamodb-container.sh",
+    "pretest": "npm run dynamodb:emulator",
+    "posttest": "docker-compose down",
     "test": "cross-env NODE_ENV=test  npx jest --runInBand --passWithNoTests --silent --noStackTrace",
     "test:verbose": "cross-env NODE_ENV=test  npx jest --passWithNoTests --runInBand",
-    "test:unit": "npm run test -- --onlyChanged --watch -c jest-unit-config.js",
-    "pretest:integration": "npm run dynamodb:emulator",
+    "test:unit": "cross-env NODE_ENV=test  npx jest --runInBand --passWithNoTests --silent --noStackTrace --onlyChanged --watch -c jest-unit-config.js",
     "test:integration": "npm run test -- --onlyChanged --watch -c jest-integration-config.js",
-    "posttest:integration": "docker-compose down"
+    "test:coverage": "npm run test -- --coverage"
   },
   "repository": {
     "type": "git",
