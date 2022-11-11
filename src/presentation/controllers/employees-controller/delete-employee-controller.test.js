@@ -17,7 +17,7 @@ describe('DeleteEmployeeController', () => {
   function makeSut() {
     const validatorSpy = new ValidatorSpy()
     const deleteEmployeeUseCaseSpy = new DeleteEmployeeSpy()
-    const sut = new Delete({
+    const sut = new DeleteEmployeeController({
       validator: validatorSpy,
       deleteEmployeeUseCase: deleteEmployeeUseCaseSpy,
     })
@@ -26,7 +26,7 @@ describe('DeleteEmployeeController', () => {
   describe('handle()', () => {
     test('should call validator with correct params', async () => {
       const { sut, validatorSpy } = makeSut()
-      const request = mockEmployeeInput()
+      const request = {id: faker.datatype.uuid()}
       await sut.handle(request)
       expect(validatorSpy.params).toEqual(request)
     })
@@ -34,33 +34,34 @@ describe('DeleteEmployeeController', () => {
     test('should return badRequest if validator returns an error', async () => {
       const { sut, validatorSpy } = makeSut()
       validatorSpy.error = faker.random.word()
-      const request = mockEmployeeInput()
+      const request = {id: faker.datatype.uuid()}
       const response = await sut.handle(request)
       expect(response).toEqual(badRequest(validatorSpy.error))
     })
 
     test('should call deleteEmployeeUseCase with correct params', async () => {
       const { sut, deleteEmployeeUseCaseSpy } = makeSut()
-      const request = mockEmployeeInput()
+      const request = {id: faker.datatype.uuid()}
       await sut.handle(request)
       expect(deleteEmployeeUseCaseSpy.params).toEqual(request)
     })
 
     test('should return noContent on success', async () => {
       const { sut } = makeSut()
-      const request = mockEmployeeInput()
+      const request = {id: faker.datatype.uuid()}
       const response = await sut.handle(request)
       expect(response).toEqual(noContent())
     })
 
     test('should return serverError if deleteEmployeeUseCase throws', async () => {
+      const mockedError = new Error(faker.random.word())
       const { sut, deleteEmployeeUseCaseSpy } = makeSut()
       jest.spyOn(deleteEmployeeUseCaseSpy, 'execute').mockImplementationOnce(() => {
-        throw new Error()
+        throw mockedError
       })
-      const request = mockEmployeeInput()
+      const request = {id: faker.datatype.uuid()}
       const response = await sut.handle(request)
-      expect(response).toEqual(serverError(new Error()))
+      expect(response).toEqual(serverError(mockedError))
     })
   })
 })
