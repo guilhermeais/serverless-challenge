@@ -6,6 +6,7 @@ dotenv.config(
 )
 
 export const env = {
+  nodeEnv: process.env.NODE_ENV,
   port: process.env.PORT,
   dynamoDBEndpoint: process.env.DYNAMODB_ENDPOINT,
   dynamoDBRegion: process.env.DYNAMODB_REGION,

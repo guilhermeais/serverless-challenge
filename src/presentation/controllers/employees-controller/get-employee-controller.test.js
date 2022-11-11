@@ -50,7 +50,7 @@ describe('GetEmployeeController', () => {
     test('should return serverError if getEmployeeUseCase throws', async () => {
       const { sut, getEmployeeUseCaseSpy } = makeSut()
       const mockedError = new Error()
-      jest.spyOn(getEmployeeUseCaseSpy, 'get').mockImplementationOnce(() => {
+      jest.spyOn(getEmployeeUseCaseSpy, 'execute').mockImplementationOnce(() => {
         throw mockedError
       })
       const response = await sut.handle({})
