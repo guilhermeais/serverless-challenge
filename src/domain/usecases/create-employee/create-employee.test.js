@@ -1,30 +1,36 @@
 const { CreateEmployee } = require('.')
 const {
   CreateEmployeeRepositorySpy,
-} = require('../../../../tests/mocks/data/repositories/create-employee-repository-spy')
+} = require('../../../../tests/mocks/infra/repositories/create-employee-repository-spy')
 const {
   GetEmployeeRepositorySpy,
-} = require('../../../../tests/mocks/data/repositories/get-employee-repository-spy')
+} = require('../../../../tests/mocks/infra/repositories/get-employee-repository-spy')
 const {
   mockEmployee,
   mockEmployeeInput,
 } = require('../../../../tests/mocks/domain/mock-employee')
 const { DuplicatedEmployeeError } = require('../../errors')
+const {
+  UUIDGereratorSpy,
+} = require('../../../../tests/mocks/infra/utils/uuid-generator-spy')
 
 describe('CreateEmployee', () => {
   function makeSut() {
     const getEmployeeRepositorySpy = new GetEmployeeRepositorySpy()
+    const uuidGeneratorSpy = new UUIDGereratorSpy()
     getEmployeeRepositorySpy.result = null
     const createEmployeeRepositorySpy = new CreateEmployeeRepositorySpy()
     const sut = new CreateEmployee({
       getEmployeeRepository: getEmployeeRepositorySpy,
       createEmployeeRepository: createEmployeeRepositorySpy,
+      uuidGenerator: uuidGeneratorSpy,
     })
 
     return {
       sut,
       getEmployeeRepositorySpy,
       createEmployeeRepositorySpy,
+      uuidGeneratorSpy,
     }
   }
   describe('execute()', () => {
@@ -60,8 +66,8 @@ describe('CreateEmployee', () => {
     })
 
     test('should call createEmployeeRepository with correct params', async () => {
-      const { sut, createEmployeeRepositorySpy } = makeSut()
-      const employee = mockEmployeeInput()
+      const { sut, createEmployeeRepositorySpy, uuidGeneratorSpy } = makeSut()
+      const employee = { ...mockEmployeeInput(), id: uuidGeneratorSpy.result }
       await sut.execute(employee)
       expect(createEmployeeRepositorySpy.params[0]).toEqual(employee)
     })
@@ -79,6 +85,24 @@ describe('CreateEmployee', () => {
       jest
         .spyOn(createEmployeeRepositorySpy, 'create')
         .mockRejectedValueOnce(mockedError)
+      const employee = mockEmployeeInput()
+      const promise = sut.execute(employee)
+      await expect(promise).rejects.toThrow(mockedError)
+    })
+
+    test('should call uuidGenerator with correct params', async () => {
+      const { sut, uuidGeneratorSpy } = makeSut()
+      const employee = mockEmployeeInput()
+      await sut.execute(employee)
+      expect(uuidGeneratorSpy.callsCount).toEqual(1)
+    })
+
+    test('should throw if uuidGenerator throws', async () => {
+      const { sut, uuidGeneratorSpy } = makeSut()
+      const mockedError = new Error('some_error')
+      jest
+        .spyOn(uuidGeneratorSpy, 'generate')
+        .mockImplementationOnce(() => {throw mockedError})
       const employee = mockEmployeeInput()
       const promise = sut.execute(employee)
       await expect(promise).rejects.toThrow(mockedError)
