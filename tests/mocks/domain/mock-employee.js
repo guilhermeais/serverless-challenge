@@ -39,4 +39,13 @@ class CreateEmployeeSpy {
   }
 }
 
-module.exports = { GetEmployeeSpy, mockEmployee, mockEmployeeInput, CreateEmployeeSpy }
+class DeleteEmployeeSpy {
+  result = mockEmployee()
+  params = null
+  async execute(params) {
+    this.params = params
+    return Promise.resolve(this.result)
+  }
+}
+
+module.exports = { GetEmployeeSpy, mockEmployee, mockEmployeeInput, CreateEmployeeSpy, DeleteEmployeeSpy }

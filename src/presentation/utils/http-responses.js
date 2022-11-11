@@ -26,8 +26,15 @@ function ok(data) {
   }
 }
 
+function noContent() {
+  return {
+    statusCode: 204,
+  }
+}
+
 module.exports = {
   badRequest,
   serverError,
   ok,
+  noContent,
 }
