@@ -3,10 +3,12 @@ const { DuplicatedEmployeeError } = require('../../errors/index.js')
 class CreateEmployee {
   #createEmployeeRepository = null
   #getEmployeeRepository = null
+  #uuidGenerator = null
 
-  constructor({ createEmployeeRepository, getEmployeeRepository }) {
+  constructor({ createEmployeeRepository, getEmployeeRepository, uuidGenerator }) {
     this.#createEmployeeRepository = createEmployeeRepository
     this.#getEmployeeRepository = getEmployeeRepository
+    this.#uuidGenerator = uuidGenerator
   }
 
   async execute(employee) {
@@ -18,8 +20,12 @@ class CreateEmployee {
       throw new DuplicatedEmployeeError(employeeExists.name)
     }
 
+    const employeeWithId = {
+      ...employee,
+      id: this.#uuidGenerator.generate(),
+    }
     const employeeCreated = await this.#createEmployeeRepository.create(
-      employee
+      employeeWithId
     )
     return employeeCreated
   }
