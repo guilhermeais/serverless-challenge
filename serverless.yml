@@ -36,3 +36,10 @@ functions:
           path: /employees/{id}
           method: get
           cors: true
+  createEmployee:
+    handler: src/main/lambda-functions/employees.createEmployeeLambda
+    events:
+      - http:
+          path: /employees
+          method: post
+          cors: true

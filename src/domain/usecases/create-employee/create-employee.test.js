@@ -45,12 +45,12 @@ describe('CreateEmployee', () => {
 
     test('should throw DuplicatedEmployeeError if employee already exists', async () => {
       const { sut, getEmployeeRepositorySpy } = makeSut()
-      const mockedEmployeeResult = mockEmployee()
+      const mockedEmployeeResult = [mockEmployee()]
       getEmployeeRepositorySpy.result = mockedEmployeeResult
       const employee = mockEmployeeInput()
       const promise = sut.execute(employee)
       await expect(promise).rejects.toThrow(
-        new DuplicatedEmployeeError(mockedEmployeeResult.name)
+        new DuplicatedEmployeeError(mockedEmployeeResult[0].name)
       )
     })
 

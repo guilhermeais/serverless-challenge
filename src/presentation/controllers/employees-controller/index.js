@@ -1,3 +1,4 @@
-const { GetEmployeeController } = require('./get-employee-controller');
+const { CreateEmployeeController } = require('./create-employee-controller')
+const { GetEmployeeController } = require('./get-employee-controller')
 
-module.exports = {GetEmployeeController}
+module.exports = { GetEmployeeController, CreateEmployeeController }

@@ -1,4 +1,5 @@
 const  { MissingParamError }  = require('../../presentation/errors/missing-param-error')
+const { Validation } = require('../base/validation')
 
 class RequiredFieldValidation extends Validation {
   #fieldName = ''
