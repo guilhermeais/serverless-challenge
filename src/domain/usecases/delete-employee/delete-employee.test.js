@@ -27,15 +27,15 @@ describe('DeleteEmployee', () => {
     test('should call getEmployeeRepository with correct params', async () => {
       const { sut, getEmployeeRepositorySpy } = makeSut()
       const id = faker.datatype.uuid()
-      await sut.execute(id)
-      expect(getEmployeeRepositorySpy.params[0]).toEqual(id)
+      await sut.execute({id})
+      expect(getEmployeeRepositorySpy.params[0]).toEqual({id})
     })
 
     test('should throw EmployeeNotFoundError if getEmployeeRepository returns null', async () => {
       const { sut, getEmployeeRepositorySpy } = makeSut()
       getEmployeeRepositorySpy.result = null
       const id = faker.datatype.uuid()
-      const promise = sut.execute(id)
+      const promise = sut.execute({id})
       await expect(promise).rejects.toThrow(new EmployeeNotFoundError({ id }))
     })
 
@@ -46,15 +46,15 @@ describe('DeleteEmployee', () => {
         .spyOn(getEmployeeRepositorySpy, 'get')
         .mockRejectedValueOnce(mockedError)
       const id = faker.datatype.uuid()
-      const promise = sut.execute(id)
+      const promise = sut.execute({id})
       await expect(promise).rejects.toThrow(mockedError)
     })
 
     test('should call deleteEmployeeRepository with correct params', async () => {
       const { sut, deleteEmployeeRepositorySpy } = makeSut()
       const id = faker.datatype.uuid()
-      await sut.execute(id)
-      expect(deleteEmployeeRepositorySpy.params[0]).toEqual(id)
+      await sut.execute({id})
+      expect(deleteEmployeeRepositorySpy.params[0]).toEqual({id})
     })
 
     test('should throw if deleteEmployeeRepository throw', async () => {
@@ -64,7 +64,7 @@ describe('DeleteEmployee', () => {
         .spyOn(deleteEmployeeRepositorySpy, 'delete')
         .mockRejectedValueOnce(mockedError)
       const id = faker.datatype.uuid()
-      const promise = sut.execute(id)
+      const promise = sut.execute({id})
       await expect(promise).rejects.toThrow(mockedError)
     })
   })

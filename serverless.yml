@@ -43,3 +43,10 @@ functions:
           path: /employees
           method: post
           cors: true
+  deleteEmployee:
+    handler: src/main/lambda-functions/employees.deleteEmployeeLambda
+    events:
+      - http:
+          path: /employees/{id}
+          method: delete
+          cors: true
