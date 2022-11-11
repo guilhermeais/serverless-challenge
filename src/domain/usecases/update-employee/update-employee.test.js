@@ -2,10 +2,10 @@ const { faker } = require('@faker-js/faker')
 const { UpdateEmployee } = require('.')
 const {
   GetEmployeeRepositorySpy,
-} = require('../../../../tests/mocks/data/repositories/get-employee-repository-spy')
+} = require('../../../../tests/mocks/infra/repositories/get-employee-repository-spy')
 const {
   UpdateEmployeeRepositorySpy,
-} = require('../../../../tests/mocks/data/repositories/update-employee-repository-spy')
+} = require('../../../../tests/mocks/infra/repositories/update-employee-repository-spy')
 const { mockEmployee } = require('../../../../tests/mocks/domain/mock-employee')
 const { EmployeeNotFoundError } = require('../../errors')
 

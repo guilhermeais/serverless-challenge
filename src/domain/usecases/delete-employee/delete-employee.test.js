@@ -1,10 +1,10 @@
 const { DeleteEmployee } = require('.')
 const {
   GetEmployeeRepositorySpy,
-} = require('../../../../tests/mocks/data/repositories/get-employee-repository-spy')
+} = require('../../../../tests/mocks/infra/repositories/get-employee-repository-spy')
 const {
   DeleteEmployeeRepositorySpy,
-} = require('../../../../tests/mocks/data/repositories/delete-employee-repository-spy')
+} = require('../../../../tests/mocks/infra/repositories/delete-employee-repository-spy')
 const { faker } = require('@faker-js/faker')
 const { EmployeeNotFoundError } = require('../../errors')
 
