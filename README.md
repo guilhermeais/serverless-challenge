@@ -61,57 +61,6 @@ O projeto tem mais ou menos 65% de coverage dos testes. Não consegui atingir 10
 | `id` | `string` | **Obrigatório**. ID Do funcionário |
 
 
-## Documentação da API
-
-#### Retorna todos os funcionários
-
-```http
-  GET /employees/{id?}
-```
-
-| Parâmetro   | Tipo       | Descrição                           |
-| :---------- | :--------- | :---------------------------------- |
-| `id` | `string` | **Opcional**. ID Do funcionário |
-| `cpf` | `string` | **Opcional**. CPF Do funcionário |
-| `name` | `string` | **Opcional**. Nome Do funcionário |
-
-#### Cria um funcionário
-
-```http
-  POST /employees
-```
-
-| Parâmetro   | Tipo       | Descrição                           |
-| :---------- | :--------- | :---------------------------------- |
-| `name` | `string` | **Obrigatório**. Nome Do funcionário |
-| `role` | `string` | **Obrigatório**. Cargo Do funcionário |
-| `cpf` | `string` | **Obrigatório**. CPF Do funcionário |
-| `salary` | `string` | **Obrigatório**. Salário Do funcionário |
-| `age` | `string` | **Obrigatório**. Idade Do funcionário |
-
-#### Cria um funcionário
-
-```http
-  PATCH /employees/{id}
-```
-**Ao menos um dos parâmetros devem ser passados no body.**
-| Parâmetro   | Tipo       | Descrição                           |
-| :---------- | :--------- | :---------------------------------- |
-| `name` | `string` | **Opcional**. Nome Do funcionário |
-| `role` | `string` | **Opcional**. Cargo Do funcionário |
-| `cpf` | `string` | **Opcional**. CPF Do funcionário |
-| `salary` | `string` | **Opcional**. Salário Do funcionário |
-| `age` | `string` | **Opcional**. Idade Do funcionário |
-
-#### Deleta um funcionário
-
-```http
-  DELETE /employees/{id}
-```
-| Parâmetro   | Tipo       | Descrição                           |
-| :---------- | :--------- | :---------------------------------- |
-| `id` | `string` | **Obrigatório**. ID Do funcionário |
-
 
 ## Rodando a aplicação
 
