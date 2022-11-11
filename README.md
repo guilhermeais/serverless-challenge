@@ -37,7 +37,7 @@ O projeto tem mais ou menos 65% de coverage dos testes. Não consegui atingir 10
 | `salary` | `string` | **Obrigatório**. Salário Do funcionário |
 | `age` | `string` | **Obrigatório**. Idade Do funcionário |
 
-#### Cria um funcionário
+#### Atualiza um funcionário
 
 ```http
   PATCH /employees/{id}
