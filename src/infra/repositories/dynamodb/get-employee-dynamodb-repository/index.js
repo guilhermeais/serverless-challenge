@@ -27,7 +27,7 @@ class GetEmployeeDynamoDBRepository {
     const result = await this.#dynamoDBClient.scan({
       ...params,
       ScanFilter:{
-        ...(name ? { name: { ComparisonOperator: 'EQ', AttributeValueList: [name] } } : {}),
+        ...(name ? { name: { ComparisonOperator: 'CONTAINS', AttributeValueList: [name] } } : {}),
         ...(cpf ? { cpf: { ComparisonOperator: 'EQ', AttributeValueList: [cpf] } } : {}),
       }
     }).promise()
